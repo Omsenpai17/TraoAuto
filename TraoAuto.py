@@ -62,11 +62,11 @@ def duyet_job(type_job, token, uid):
 		if "cache" in r:
 			return r['cache']
 		elif "success" in r:
-			dai = f'''{Colors.yellow}______ ______ ______ ______ ______ ______ ______ ______ ______  
-|______|______|______|______|______|______|______|______|______|'''
-			print(dai)
-			print(f"{Colors.cyan}Pekerjaan berhasil {r['data']['job_success']} Misi | {Colors.green}{r['data']['msg']} | {Colors.yellow}{r['data']['xu']}")
-			print(dai)
+			job = ['data']['job_success']
+			coin = ['data']['msg']
+			money = ['data']['xu']
+			tab = [pan('Sukses'),pan(job),pan(coin),pan(money)]
+			console.print(col(tab))
 			return 'error'
 		else:
 			print(f"{Colors.red}{r['error']}")
