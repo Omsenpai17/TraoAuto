@@ -255,8 +255,8 @@ if check_log == 'success':
 				if check_duyet != 'error':
 					dem_tong += 1
 					t_now = datetime.now().strftime("%H:%M:%S")
-					print(f'{Colors.yellow}[{dem_tong}] {Colors.red}| {Colors.cyan}{t_now} {Colors.red}| {Colors.pink}{type_type} {Colors.red}| {Colors.light_gray}{uid}')
-
+					text = [pan(f'[ {dem_tong} ]'),pan(f'{t_now}'),pan(f'{type_type}'),pan(f'{uid}')]
+					print(col(text))
 					if check_duyet > 9:
 						sleep(3)
 						a = duyet_job(type_nhan, token_tds, api_type)
