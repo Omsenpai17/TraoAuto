@@ -2,6 +2,9 @@
 import os
 from time import sleep
 from datetime import datetime
+from rich import print
+from rich.columns import Columns as col
+from rich.panel import Panel as pan
 
 os.environ['TZ'] = 'Asia/Ho_Chi_Minh'
 
