@@ -270,7 +270,7 @@ if check_log == 'success':
 					break
 				else:
 					for i in range(delay,-1,-1):
-						print(Colors.green + 'Mohontunggu: '+str(i)+' Detik',end=('\r'))
+						print(Colors.green + 'Mohontunggu: '+str(i)+' Detik' + Colors.white,end=('\r'))
 						sleep(1)
 
 		if dem_tong == max_job:
