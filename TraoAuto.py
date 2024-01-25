@@ -2,10 +2,11 @@
 import os
 from time import sleep
 from datetime import datetime
-from rich import print
 from rich.columns import Columns as col
 from rich.panel import Panel as pan
+from rich.console import Console
 
+console = Console()
 os.environ['TZ'] = 'Asia/Ho_Chi_Minh'
 
 try:
@@ -259,7 +260,7 @@ if check_log == 'success':
 					dem_tong += 1
 					t_now = datetime.now().strftime("%H:%M:%S")
 					text = [pan(f'[ {dem_tong} ]'),pan(f'{t_now}'),pan(f'{type_type}'),pan(f'{uid}')]
-					print(col(text))
+					console.print(col(text))
 					if check_duyet > 9:
 						sleep(3)
 						a = duyet_job(type_nhan, token_tds, api_type)
