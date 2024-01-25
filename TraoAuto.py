@@ -265,8 +265,7 @@ if check_log == 'success':
 				if dem_tong == max_job:
 					break
 				else:
-					for i in range(delay,-1,-1):
-						print("""
+					print("""
   .--.--.      ___                         ___     
  /  /    '.  ,--.'|_                     ,--.'|_   
 |  :  /`. /  |  | :,'            __  ,-. |  | :,'  
@@ -280,6 +279,7 @@ if check_log == 'success':
   `--'---'   |  ,   ;  :   .'   ---'     |  ,   /  
               ---`-'|  ,     .-./         ---`-'   
                      `--`---'                      """)
+					for i in range(delay,-1,-1):
 						print(Colors.green + 'Mohontunggu: '+str(i)+' Detik',end=('\r'))
 						sleep(1)
 
