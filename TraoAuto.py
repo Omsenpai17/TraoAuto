@@ -265,7 +265,7 @@ if check_log == 'success':
 					break
 				else:
 					for i in range(delay,-1,-1):
-                            print("""
+						print("""
   .--.--.      ___                         ___     
  /  /    '.  ,--.'|_                     ,--.'|_   
 |  :  /`. /  |  | :,'            __  ,-. |  | :,'  
