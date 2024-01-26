@@ -259,7 +259,7 @@ if check_log == 'success':
 					dem_tong += 1
 					t_now = datetime.now().strftime("%H:%M:%S")
 					text = [pan(f'[ {dem_tong} ]'),pan(f'{t_now}'),pan(f'{type_type}'),pan(f'{uid}')]
-					console.print(col(text))
+					console.print(col(text,expand=True))
 					if check_duyet > 9:
 						sleep(3)
 						a = duyet_job(type_nhan, token_tds, api_type)
