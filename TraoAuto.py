@@ -65,7 +65,7 @@ def duyet_job(type_job, token, uid):
 			coin = r['data']['msg']
 			money = r['data']['xu']
 			tab = [pan('Sukses'),pan(f'{job}'),pan(f'{coin}'),pan(f'{money}')]
-			console.print(col(tab))
+			console.print(col(tab,expand=True))
 			return 'error'
 		else:
 			print(f"{Colors.red}{r['error']}")
