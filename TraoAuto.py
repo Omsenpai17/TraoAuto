@@ -277,7 +277,7 @@ if check_log == 'success':
 					with progress:
     						tugas = progress.add_task("",total=max_job)
 					while not progress.finished:
-    						progress.update(task1, advance=1)
+    						progress.update(tugas, advance=1)
 					if check_duyet > 9:
 						sleep(3)
 						a = duyet_job(type_nhan, token_tds, api_type)
