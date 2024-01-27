@@ -264,7 +264,8 @@ if check_log == 'success':
   						)
 		list_job = load_job(type_load, token_tds)
 		sleep(2)
-		tugas = progress.add_task("",total=max_job)
+		with progress:
+			tugas = progress.add_task("",total=max_job)
 		if isinstance(list_job, dict) == True:
 			for job in list_job['data']:
 				uid = job['id']
