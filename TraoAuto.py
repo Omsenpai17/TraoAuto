@@ -277,7 +277,7 @@ if check_log == 'success':
 						dem_tong += 1
 						t_now = datetime.now().strftime("%H:%M:%S")
 						progress.update(tugas, advance=1)
-						if check_duyet > 9:
+						if check_duyet >= 10:
 							a = duyet_job(type_nhan, token_tds, api_type)
 							sleep(3)
 					if dem_tong == max_job:
