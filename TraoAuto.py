@@ -4,6 +4,15 @@ from datetime import datetime
 from rich.columns import Columns as col
 from rich.panel import Panel as pan
 from rich.console import Console
+from rich.progress import (
+    BarColumn,
+    Progress,
+    SpinnerColumn,
+    TextColumn,
+    TimeElapsedColumn,
+    TimeRemainingColumn,
+    MofNCompleteColumn
+)
 
 console = Console()
 os.environ['TZ'] = 'Asia/Ho_Chi_Minh'
@@ -258,8 +267,17 @@ if check_log == 'success':
 				if check_duyet != 'error':
 					dem_tong += 1
 					t_now = datetime.now().strftime("%H:%M:%S")
-					text = [pan(f'[ {dem_tong} ]'),pan(f'{t_now}'),pan(f'{type_type}'),pan(f'{uid}')]
-					console.print(col(text,expand=True))
+					progress = Progress(
+    					SpinnerColumn('dots9'),
+						TextColumn("[green]Running"),
+						BarColumn(),
+						TimeRemainingColumn(),
+						MofNCompleteColumn()
+  						)
+					with progress:
+    						tugas = progress.add_task("",total=max_job)
+					while not progress.finished:
+    						progress.update(task1, advance=1)
 					if check_duyet > 9:
 						sleep(3)
 						a = duyet_job(type_nhan, token_tds, api_type)
@@ -269,7 +287,6 @@ if check_log == 'success':
 					break
 				else:
 					for i in range(delay,-1,-1):
-						print(Colors.green + 'Mohon tunggu: '+str(i)+' Detik' + Colors.white,end=('\r'))
 						sleep(1)
 
 		if dem_tong == max_job:
