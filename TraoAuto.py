@@ -258,7 +258,7 @@ if check_log == 'success':
 		progress = Progress(
     					SpinnerColumn('dots9'),
 						TextColumn("[green]Running"),
-						BarColumn(),
+						BarColumn(bar_width=''),
 						TimeRemainingColumn(),
 						MofNCompleteColumn()
   						)
