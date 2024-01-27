@@ -255,29 +255,26 @@ if check_log == 'success':
 	dem_tong = 0
 
 	while True:
-		list_job = load_job(type_load, token_tds)
-		sleep(2)
-		if isinstance(list_job, dict) == True:
-			for job in list_job['data']:
-				uid = job['id']
-				link = job['link']
-				os.system(f'termux-open-url {link}')
-				check_duyet = duyet_job(type_duyet, token_tds, uid)
-				
-				if check_duyet != 'error':
-					dem_tong += 1
-					t_now = datetime.now().strftime("%H:%M:%S")
-					progress = Progress(
+		progress = Progress(
     					SpinnerColumn('dots9'),
 						TextColumn("[green]Running"),
 						BarColumn(),
 						TimeRemainingColumn(),
 						MofNCompleteColumn()
   						)
-					with progress:
-    						tugas = progress.add_task("",total=max_job)
-					while not progress.finished:
-    						progress.update(tugas, advance=1)
+		list_job = load_job(type_load, token_tds)
+		sleep(2)
+		tugas = progress.add_task("",total=max_job)
+		if isinstance(list_job, dict) == True:
+			for job in list_job['data']:
+				uid = job['id']
+				link = job['link']
+				os.system(f'termux-open-url {link}')
+				check_duyet = duyet_job(type_duyet, token_tds, uid)
+				if check_duyet != 'error':
+					dem_tong += 1
+					t_now = datetime.now().strftime("%H:%M:%S")
+					progress.update(tugas, advance=1)
 					if check_duyet > 9:
 						sleep(3)
 						a = duyet_job(type_nhan, token_tds, api_type)
