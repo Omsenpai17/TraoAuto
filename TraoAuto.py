@@ -258,9 +258,10 @@ if check_log == 'success':
 		progress = Progress(
     					SpinnerColumn('dots9'),
 						TextColumn("[green]Running"),
-						BarColumn(bar_width=0),
+						BarColumn(),
 						TimeRemainingColumn(),
-						MofNCompleteColumn()
+						MofNCompleteColumn(),
+						expand=True
   						)
 		list_job = load_job(type_load, token_tds)
 		sleep(1)
