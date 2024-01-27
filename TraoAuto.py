@@ -266,26 +266,26 @@ if check_log == 'success':
 		sleep(2)
 		with progress:
 			tugas = progress.add_task("",total=max_job)
-		if isinstance(list_job, dict) == True:
-			for job in list_job['data']:
-				uid = job['id']
-				link = job['link']
-				os.system(f'termux-open-url {link}')
-				check_duyet = duyet_job(type_duyet, token_tds, uid)
-				if check_duyet != 'error':
-					dem_tong += 1
-					t_now = datetime.now().strftime("%H:%M:%S")
-					progress.update(tugas, advance=1)
-					if check_duyet > 9:
-						sleep(3)
-						a = duyet_job(type_nhan, token_tds, api_type)
+			if isinstance(list_job, dict) == True:
+				for job in list_job['data']:
+					uid = job['id']
+					link = job['link']
+					os.system(f'termux-open-url {link}')
+					check_duyet = duyet_job(type_duyet, token_tds, uid)
+					if check_duyet != 'error':
+						dem_tong += 1
+						t_now = datetime.now().strftime("%H:%M:%S")
+						progress.update(tugas, advance=1)
+						if check_duyet > 9:
+							sleep(3)
+							a = duyet_job(type_nhan, token_tds, api_type)
 
 
-				if dem_tong == max_job:
-					break
-				else:
-					for i in range(delay,-1,-1):
-						sleep(1)
+					if dem_tong == max_job:
+						break
+					else:
+						for i in range(delay,-1,-1):
+							sleep(1)
 
 		if dem_tong == max_job:
 			print(f'{Colors.green}Complete {max_job} Pekerjaan!')
