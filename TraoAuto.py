@@ -263,7 +263,6 @@ if check_log == 'success':
 						MofNCompleteColumn()
   						)
 		list_job = load_job(type_load, token_tds)
-		sleep(2)
 		with progress:
 			tugas = progress.add_task("",total=max_job)
 			if isinstance(list_job, dict) == True:
@@ -276,13 +275,11 @@ if check_log == 'success':
 						dem_tong += 1
 						t_now = datetime.now().strftime("%H:%M:%S")
 						progress.update(tugas, advance=1)
-
-
 					if dem_tong == max_job:
 						break
 					else:
 						for i in range(delay,-1,-1):
-							sleep(1)
+							sleep(0)
 
 		if dem_tong == max_job:
 			if check_duyet > 9:
