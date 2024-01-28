@@ -201,7 +201,7 @@ while True:
 				console.rule('User')
 				print(option_acc)
 				try:
-					print(panel(Align.center('Pilihan Akun mu',subtitle='╭─────',subtitle_align='left')))
+					print(panel(Align.center('Pilihan Akun mu'),subtitle='╭─────',subtitle_align='left'))
 					choice = input("   ╰──>> ")
 					if choice in [1,2]:
 						break
