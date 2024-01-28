@@ -168,11 +168,9 @@ option = '''
 1. [dodger_blue3]auto Follow[/dodger_blue3]
 2. [dodger_blue2]auto Like (tidak disarankan)
 '''
-option_acc = '''
-[blue3]Pilihan Akun[/blue3] :
-1. [dodger_blue3]Melanjutkan dengan akun Traodoisub yang sudah ada[/dodger_blue3]
-2. [dodger_blue2]Memakai akun Traodoisub yang baru
-'''
+option_acc = Table.grid()
+option_acc.add_row('1.','Menggunakan Akun Lama','(Tidak menghaous akun yang sudah tersimpan)')
+option_acc.add_row('2.','Menngunakan Akun Baru','(Menghapus akun lama dan menggunakan yang baru)')
 
 print(panel(Align.center(banner),border_style='cyan'))
 console.rule('User')
@@ -184,7 +182,8 @@ while True:
 		f.close()
 		cache = 'old'
 	except FileNotFoundError:
-		print(panel('Masukan Traodoisub Acces Token',subtitle='╭─────',subtitle_align='left'))
+		print(panel(Align.center('[green]Masukan Traodoisub Acces Token[/]',
+						   subtitle='╭─────',subtitle_align='left')))
 		token_tds = input("   ╰──>> ")
 		cache = 'new'
 	
@@ -198,7 +197,8 @@ while True:
 		if cache == 'old':
 			while True:
 				print(panel(Align.center(banner_account),border_style='bright_blue'))
-				console.rule('')
+				console.rule('User')
+				login_tds(token_tds)
 				print(option_acc)
 				try:
 					print(panel('Pilihan Akun mu',subtitle='╭─────',subtitle_align='left'))
@@ -232,7 +232,8 @@ while True:
 if check_log == 'success':
 	#Username tiktok
 	while True:
-		print(panel('Masukan username tiktok (pastikan sudah berada di web)',subtitle='╭─────',subtitle_align='left'))
+		print(panel('Masukan username tiktok (pastikan sudah berada di web)',
+			  subtitle='╭─────',subtitle_align='left'))
 		id_tiktok = input("   ╰──>> ")
 		for _ in range(3):
 			check_log = check_tiktok(id_tiktok,token_tds)
@@ -245,10 +246,11 @@ if check_log == 'success':
 			break
 		elif check_log == 'error_token':
 			os.system('clear')
-			print(panel(f"Username tiktok belum ditambah di website tolong tambah dulu",border_style='bright_red'))
+			print(panel(Align.center(f"Username tiktok belum ditambah di website tolong tambah dulu",
+							border_style='bright_red')))
 		else:
 			os.system('clear')
-			print("[red]Server error tolong ulangi[/red]")
+			print(Align.center("[red]Server error tolong ulangi[/red]"))
 
 	while True:
 		print(panel(Align.center(banner_tools),border_style='cyan'))
