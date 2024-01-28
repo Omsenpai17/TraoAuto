@@ -175,7 +175,7 @@ option.add_row('2.','[#e8851c]Auto Like','([#ed810e]Tidak Disarankan[/])')
 
 
 option_acc = Table.grid(expand=True)
-option_acc.add_row(Align.center('Pilihan Akun'))
+option_acc.add_column('Pilihan Akun')
 option_acc.add_row('1.','[#e8851c]Menggunakan Akun Lama','([#ed810e]Tidak menghapus akun yang sudah tersimpan[/])')
 option_acc.add_row('2.','[#e8851c]Menggunakan Akun Baru','([#ed810e]Menghapus akun lama dan menggunakan yang baru[/])')
 
@@ -238,7 +238,7 @@ while True:
 if check_log == 'success':
 	#Username tiktok
 	while True:
-		print(panel('Masukan username tiktok (pastikan sudah berada di web)',
+		print(panel(Align.center('Masukan username tiktok (pastikan sudah berada di web)'),
 			  subtitle='╭─────',subtitle_align='left'))
 		id_tiktok = input("   ╰──>> ")
 		for _ in range(3):
