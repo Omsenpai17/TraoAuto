@@ -169,6 +169,7 @@ option = '''
 2. [dodger_blue2]auto Like (tidak disarankan)
 '''
 option_acc = Table.grid()
+option_acc.add_column()
 option_acc.add_row('1.','Menggunakan Akun Lama','(Tidak menghaous akun yang sudah tersimpan)')
 option_acc.add_row('2.','Menngunakan Akun Baru','(Menghapus akun lama dan menggunakan yang baru)')
 
