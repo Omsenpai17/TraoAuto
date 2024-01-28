@@ -319,7 +319,7 @@ if check_log == 'success':
 		type_type = 'TYM'
 
 	dem_tong = 0
-	print(panel(Align.center(banner_start),border_stle='bright_blue'))
+	print(panel(Align.center(banner_start),border_style='bright_blue'))
 	console.rule('')
 	
 	while True:
