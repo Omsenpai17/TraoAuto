@@ -175,12 +175,11 @@ option.add_row('2.','[#e8851c]Auto Like','([#ed810e]Tidak Disarankan[/])')
 
 
 option_acc = Table.grid(expand=True)
-option_acc.add_column('Pilihan Akun')
 option_acc.add_row('1.','[#e8851c]Menggunakan Akun Lama','([#ed810e]Tidak menghapus akun yang sudah tersimpan[/])')
 option_acc.add_row('2.','[#e8851c]Menggunakan Akun Baru','([#ed810e]Menghapus akun lama dan menggunakan yang baru[/])')
 
 print(panel(Align.center(banner),border_style='cyan'))
-console.rule('User')
+console.rule('>> Pilihan Akun <<')
 while True:
 	try:
 		f = open(f'TDS.txt','r')
