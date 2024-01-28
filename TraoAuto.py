@@ -208,7 +208,7 @@ while True:
 				print(option_acc)
 				try:
 					print(panel(Align.center('[cyan]Pilihan Akun mu'),subtitle='╭─────',subtitle_align='left'))
-					choice = input("   ╰──>> ")
+					choice = int(input("   ╰──>> "))
 					if choice in [1,2]:
 						break
 					else:
