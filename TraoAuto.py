@@ -168,14 +168,13 @@ option = '''
 1. [dodger_blue3]auto Follow[/dodger_blue3]
 2. [dodger_blue2]auto Like (tidak disarankan)
 '''
-option_acc = Table.grid()
+option_acc = Table.grid(expand=True)
 option_acc.add_column()
 option_acc.add_row('1.','Menggunakan Akun Lama','(Tidak menghaous akun yang sudah tersimpan)')
 option_acc.add_row('2.','Menngunakan Akun Baru','(Menghapus akun lama dan menggunakan yang baru)')
 
 print(panel(Align.center(banner),border_style='cyan'))
 console.rule('User')
-sleep(2)
 while True:
 	try:
 		f = open(f'TDS.txt','r')
@@ -194,6 +193,7 @@ while True:
 			break
 		else:
 			sleep(2)
+	os.system('clear')
 	if check_log == 'success':
 		if cache == 'old':
 			while True:
@@ -202,7 +202,7 @@ while True:
 				login_tds(token_tds)
 				print(option_acc)
 				try:
-					print(panel('Pilihan Akun mu',subtitle='╭─────',subtitle_align='left'))
+					print(panel(Align.center('Pilihan Akun mu',subtitle='╭─────',subtitle_align='left')))
 					choice = input("   ╰──>> ")
 					if choice in [1,2]:
 						break
