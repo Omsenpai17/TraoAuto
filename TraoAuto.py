@@ -47,9 +47,11 @@ def login_tds(token):
 					panel(f'[rgb(95,95,255)]Koin : [rgb(95,255,175)]{koin}',border_style='blue')]
 
 			print(columns(user,expand=True))
+			sleep(1)
 			return 'success'
 		else:
 			print(panel('[red]Gagal[/red] masuk kedalam akun | Coba Lagi',expand=False,border_style='red'))
+			sleep(1)
 			return 'error_token'
 	except:
 		return 'error'
