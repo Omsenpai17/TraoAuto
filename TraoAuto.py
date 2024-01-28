@@ -169,13 +169,13 @@ option = '''
 2. [dodger_blue2]auto Like (tidak disarankan)
 '''
 option = Table.grid(expand=True)
-option.add_column(header='[#e3923b]Pilih salah satu dari alat[/#e3923b]')
+option.add_row(Align.center('Pilihan Tools'))
 option.add_row('1.','[#e8851c]Auto Follow','([#ed810e]Disarankan[/])')
 option.add_row('2.','[#e8851c]Auto Like','([#ed810e]Tidak Disarankan[/])')
 
 
 option_acc = Table.grid(expand=True)
-option_acc.add_column(header='Pilihan Akun')
+option_acc.add_row(Align.center('Pilihan Akun'))
 option_acc.add_row('1.','[#e8851c]Menggunakan Akun Lama','([#ed810e]Tidak menghapus akun yang sudah tersimpan[/])')
 option_acc.add_row('2.','[#e8851c]Menggunakan Akun Baru','([#ed810e]Menghapus akun lama dan menggunakan yang baru[/])')
 
