@@ -238,7 +238,7 @@ if check_log == 'success':
 	#Username tiktok
 	while True:
 		print(panel(Align.center('Masukan username tiktok (pastikan sudah berada di web)'),
-			  subtitle='╭─────',subtitle_align='left'))
+			  subtitle='╭─────',subtitle_align='left',border_style='#3b8ce3'))
 		id_tiktok = input("   ╰──>> ")
 		for _ in range(3):
 			check_log = check_tiktok(id_tiktok,token_tds)
@@ -277,7 +277,7 @@ if check_log == 'success':
 
 	while True:
 		try:
-			print(panel('Delay antara pekerjaan (detik)',subtitle='╭─────┤ Minimal 3 ├',subtitle_align='left'))
+			print(panel('Delay antara pekerjaan (detik)',subtitle='╭─────┤ Minimal 3 ',subtitle_align='left'))
 			delay = int(input("   ╰──>> "))
 			if delay >= 3:
 				break
