@@ -189,6 +189,7 @@ while True:
 	for _ in range(3):
 		check_log = login_tds(token_tds)
 		if check_log == 'success' or check_log == 'error_token':
+			print(check_log)
 			break
 		else:
 			sleep(2)
