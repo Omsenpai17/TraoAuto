@@ -182,7 +182,7 @@ while True:
 		cache = 'old'
 	except FileNotFoundError:
 		print(panel('Masukan Traodoisub Acces Token',subtitle='╭─────',subtitle_align='left'))
-		token_tds = input("  ╰──>> ")
+		token_tds = input("   ╰──>> ")
 		cache = 'new'
 	
 	for _ in range(3):
@@ -195,12 +195,13 @@ while True:
 	if check_log == 'success':
 		if cache == 'old':
 			while True:
+				os.system('clear')
 				print(panel(Align.center(banner_account),border_style='bright_blue'))
 				console.rule('')
 				print(option_acc)
 				try:
-					print(panel('Pilihan Akun mu',subtitle='╭─────┤',subtitle_align='left'))
-					choice = input("  ╰──>> ")
+					print(panel('Pilihan Akun mu',subtitle='╭─────',subtitle_align='left'))
+					choice = input("   ╰──>> ")
 					if choice in [1,2]:
 						break
 					else:
@@ -231,7 +232,7 @@ if check_log == 'success':
 	#Username tiktok
 	while True:
 		print(panel('Masukan username tiktok (pastikan sudah berada di web)',subtitle='╭─────',subtitle_align='left'))
-		id_tiktok = input("  ╰──>> ")
+		id_tiktok = input("   ╰──>> ")
 		for _ in range(3):
 			check_log = check_tiktok(id_tiktok,token_tds)
 			if check_log == 'success' or check_log == 'error_token':
@@ -254,7 +255,7 @@ if check_log == 'success':
 		print(option)
 		try:
 			print(panel('Pilih Tools',subtitle='╭─────',subtitle_align='left'))
-			choice = int(input("  ╰──>> "))
+			choice = int(input("   ╰──>> "))
 			if choice in [1,2]:
 				break
 			else:
@@ -268,8 +269,8 @@ if check_log == 'success':
 
 	while True:
 		try:
-			print(panel('Delay antara pekerjaan (detik)',subtitle='╭─────┤Minimal 3',subtitle_align='left'))
-			delay = int(input("  ╰──>> "))
+			print(panel('Delay antara pekerjaan (detik)',subtitle='╭─────┤ Minimal 3 ├',subtitle_align='left'))
+			delay = int(input("   ╰──>> "))
 			if delay >= 3:
 				break
 			else:
@@ -284,7 +285,7 @@ if check_log == 'success':
 		while True:
 			try:
 				print(panel('Berapa pekerjaan yang akan dilakukan',subtitle='╭─────┤Minimal 10',subtitle_align='left'))
-				max_job = int(input("  ╰──>> "))
+				max_job = int(input("   ╰──>> "))
 				if max_job >= 10:
 					break
 				else:
