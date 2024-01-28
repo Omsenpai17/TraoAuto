@@ -168,10 +168,16 @@ option = '''
 1. [dodger_blue3]auto Follow[/dodger_blue3]
 2. [dodger_blue2]auto Like (tidak disarankan)
 '''
+option = Table.grid(expand=True)
+option.add_column(header='[#e3923b]Pilih salah satu dari alat[/#e3923b]')
+option.add_row('1.','[#e8851c]Auto Follow','([#ed810e]Disarankan[/])')
+option.add_row('2.','[#e8851c]Auto Like','([#ed810e]Tidak Disarankan[/])')
+
+
 option_acc = Table.grid(expand=True)
-option_acc.add_column()
-option_acc.add_row('1.','Menggunakan Akun Lama','(Tidak menghaous akun yang sudah tersimpan)')
-option_acc.add_row('2.','Menngunakan Akun Baru','(Menghapus akun lama dan menggunakan yang baru)')
+option_acc.add_column(header='Pilihan Akun')
+option_acc.add_row('1.','[#e8851c]Menggunakan Akun Lama','([#ed810e]Tidak menghapus akun yang sudah tersimpan[/])')
+option_acc.add_row('2.','[#e8851c]Menggunakan Akun Baru','([#ed810e]Menghapus akun lama dan menggunakan yang baru[/])')
 
 print(panel(Align.center(banner),border_style='cyan'))
 console.rule('User')
@@ -201,7 +207,7 @@ while True:
 				console.rule('User')
 				print(option_acc)
 				try:
-					print(panel(Align.center('Pilihan Akun mu'),subtitle='╭─────',subtitle_align='left'))
+					print(panel(Align.center('[cyan]Pilihan Akun mu'),subtitle='╭─────',subtitle_align='left'))
 					choice = input("   ╰──>> ")
 					if choice in [1,2]:
 						break
@@ -246,8 +252,8 @@ if check_log == 'success':
 			break
 		elif check_log == 'error_token':
 			os.system('clear')
-			print(panel(Align.center(f"Username tiktok belum ditambah di website tolong tambah dulu",
-							border_style='bright_red')))
+			print(panel(Align.center(f"Username tiktok belum ditambah di website tolong tambah dulu"),
+							border_style='bright_red'))
 		else:
 			os.system('clear')
 			print(Align.center("[red]Server error tolong ulangi[/red]"))
