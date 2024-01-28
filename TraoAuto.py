@@ -1,8 +1,23 @@
+try:
+	import requests
+except:
+	os.system("pip3 install requests")
+	import requests
+try:
+	import rich
+except:
+	os.system("pip3 install rich")
+	import rich
 import os
 from time import sleep
 from datetime import datetime
-from rich.columns import Columns as col
-from rich.panel import Panel as pan
+from rich.align import Align
+from rich.columns import Columns as columns
+from rich.panel import Panel as panel
+from rich import print,box
+from rich.live import Live
+from rich.table import Table
+from rich.rule import Rule as rule
 from rich.console import Console
 from rich.progress import (
     BarColumn,
@@ -13,21 +28,7 @@ from rich.progress import (
     TimeRemainingColumn,
     MofNCompleteColumn
 )
-
 console = Console()
-os.environ['TZ'] = 'Asia/Ho_Chi_Minh'
-
-try:
-	import requests
-except:
-	os.system("pip3 install requests")
-	import requests
-
-try:
-	from pystyle import Colors, Colorate, Write, Center, Add, Box
-except:
-	os.system("pip3 install pystyle")
-	from pystyle import Colors, Colorate, Write, Center, Add, Box
 
 headers = {
 	'authority': 'traodoisub.com',
@@ -40,14 +41,19 @@ def login_tds(token):
 	try:
 		r = requests.get('https://traodoisub.com/api/?fields=profile&access_token='+token, headers=headers, timeout=5).json()
 		if 'success' in r:
-			os.system('clear')
-			print(Colors.green + f"Sukses masuk kedalam akun\nUser: {Colors.yellow + r['data']['user'] + Colors.green} | Coin : {Colors.yellow + r['data']['xu']}")
+			nama = r['data']['user']
+			koin = r['data']['xu']
+			user = [panel(f'[royal_blue1]Nama User : [sea_green1]{nama}',border_style='blue'),
+					panel(f'[rgb(95,95,255)]Koin : [rgb(95,255,175)]{koin}',border_style='blue')]
+
+			print(columns(user,expand=True))
 			return 'success'
 		else:
-			print(Colors.red + f"Gagal masuk kedalam akun. Coba lagi :\n")
+			print(panel('[red]Gagal[/red] masuk kedalam akun | Coba Lagi',expand=False,border_style='red'))
 			return 'error_token'
 	except:
 		return 'error'
+
 
 def load_job(type_job, token):
 	try:
@@ -56,10 +62,10 @@ def load_job(type_job, token):
 			return r
 		elif "countdown" in r:
 			sleep(round(r['countdown']))
-			print(Colors.red + f"{r['error']}\n")
+			print(f"[bright_red]{r['error']}\n")
 			return 'error_countdown'
 		else:
-			print(Colors.red + f"{r['error']}\n")
+			print(f"[bright_red]{r['error']}\n")
 			return 'error_error'
 	except:
 		return 'error'
@@ -73,32 +79,74 @@ def duyet_job(type_job, token, uid):
 			job = r['data']['job_success']
 			coin = r['data']['msg']
 			money = r['data']['xu']
-			tab = [pan('Sukses'),pan(f'{job}'),pan(f'{coin}'),pan(f'{money}')]
-			console.print(col(tab,expand=True))
+			tab =  [panel('[green]Berhasil',title='Status',border_style='green'),
+					panel(f'{job}',title='Pekerjaan',border_style=("green")),
+					panel(f'{coin}',title='Koin Bertambah',border_style=('green')),
+					panel(f'{money}',title='Koin',border_style=('green'))]
+
+			console.print(columns(tab,expand=True))
 			return 'error'
 		else:
-			print(f"{Colors.red}{r['error']}")
+			print(f"[bright_red]{r['error']}")
 			return 'error'
 	except:
 		return 'error'
-
 
 def check_tiktok(id_tiktok, token):
 	try:
 		r = requests.get('https://traodoisub.com/api/?fields=tiktok_run&id='+id_tiktok+'&access_token='+token, headers=headers, timeout=5).json()
 		if 'success' in r:
 			os.system('clear')
-			print(Colors.green + f"{r['data']['msg']}|ID: {Colors.yellow + r['data']['id'] + Colors.green}")
+			print(f"Tiktok ID : {r['data']['id']}")
 			return 'success'
 		else:
-			print(Colors.red + f"{r['error']}\n")
+			print(f"[bright_red]{r['error']}")
 			return 'error_token'
 	except:
 		return 'error'
 
-
 os.system('clear')
-banner = r'''        ,----,                                                                            
+banner_start = ('''  .--.--.      ___                         ___     
+ /  /    '.  ,--.'|_                     ,--.'|_   
+|  :  /`. /  |  | :,'            __  ,-. |  | :,'  
+;  |  |--`   :  : ' :          ,' ,'/ /| :  : ' :  
+|  :  ;_   .;__,'  /   ,--.--. '  | |' .;__,'  /   
+ \  \    `.|  |   |   /       \|  |   ,|  |   |    
+  `----.   :__,'| :  .--.  .-. '  :  / :__,'| :    
+  __ \  \  | '  : |__ \__\/: . |  | '    '  : |__  
+ /  /`--'  / |  | '.'|," .--.; ;  : |    |  | '.'| 
+'--'.     /  ;  :    /  /  ,.  |  , ;    ;  :    ; 
+  `--'---'   |  ,   ;  :   .'   ---'     |  ,   /  
+              ---`-'|  ,     .-./         ---`-'   
+                     `--`---'                      ''')
+banner_account = '''   ,---,                                                            ___     
+  '  .' \                                                         ,--.'|_   
+ /  ;    '.                       ,---.          ,--,      ,---,  |  | :,'  
+:  :       \                     '   ,'\       ,'_ /|  ,-+-. /  | :  : ' :  
+:  |   /\   \    ,---.    ,---. /   /   | .--. |  | : ,--.'|'   .;__,'  /   
+|  :  ' ;.   :  /     \  /     .   ; ,. ,'_ /| :  . ||   |  ,"' |  |   |    
+|  |  ;/  \   \/    / ' /    / '   | |: |  ' | |  . .|   | /  | :__,'| :    
+'  :  | \  \ ,.    ' / .    ' /'   | .; |  | ' |  | ||   | |  | | '  : |__  
+|  |  '  '--' '   ; :__'   ; :_|   :    :  | : ;  ; ||   | |  |/  |  | '.'| 
+|  :  :       '   | '.''   | '.'\   \  /'  :  `--'   |   | |--'   ;  :    ; 
+|  | ,'       |   :    |   :    :`----' :  ,      .-.|   |/       |  ,   /  
+`--''          \   \  / \   \  /         `--`----'   '---'         ---`-'   
+                `----'   `----'                                             '''
+banner_tools = '''        ,----,                                   
+      ,/   .`|                                   
+    ,`   .'  :                 ,--,              
+  ;    ;     /               ,--.'|              
+.'___,/    ,' ,---.    ,---. |  | :              
+|    :     | '   ,'\  '   ,'\:  : '   .--.--.    
+;    |.';  ;/   /   |/   /   |  ' |  /  /    '   
+`----'  |  .   ; ,. .   ; ,. '  | | |  :  /`./   
+    '   :  '   | |: '   | |: |  | : |  :  ;_     
+    |   |  '   | .; '   | .; '  : |__\  \    `.  
+    '   :  |   :    |   :    |  | '.'|`----.   \ 
+    ;   |.' \   \  / \   \  /;  :    /  /`--'  / 
+    '---'    `----'   `----' |  ,   '--'.     /  
+                              ---`-'  `--'---'   '''
+banner = '''[purple]        ,----,                                                                            
       ,/   .`|                                                                            
     ,`   .'  :                              ,---,                        ___              
   ;    ;     /                             '  .' \                     ,--.'|_            
@@ -113,23 +161,19 @@ banner = r'''        ,----,
     '---'    ---'  ;  :   .'   \ `----'  |  | ,'        :  ,      .-./ |  ,   /  `----'   
                    |  ,     .-./         `--''           `--`----'      ---`-'            
                     `--`---'                                                              '''
-gach  = '========================================='
-option = f'''{gach}{Colors.green}
-Pilih salah satu dari alat: {Colors.red}
-1. auto Follow
-2. auto Like (tidak disarankan)
-{Colors.yellow}{gach}
+option = '''
+[blue3]Pilih salah satu dari alat[/blue3] :
+1. [dodger_blue3]auto Follow[/dodger_blue3]
+2. [dodger_blue2]auto Like (tidak disarankan)
 '''
-option_acc = f'''{gach}{Colors.green}
-Pilihan Akun: {Colors.red}
-1. Melanjutkan dengan akun Traodoisub yang sudah ada
-2. Memakai akun Traodoisub yang baru
-{Colors.yellow}{gach}
+option_acc = '''
+[blue3]Pilihan Akun[/blue3] :
+1. [dodger_blue3]Melanjutkan dengan akun Traodoisub yang sudah ada[/dodger_blue3]
+2. [dodger_blue2]Memakai akun Traodoisub yang baru
 '''
-print(Colorate.Horizontal(Colors.yellow_to_red, Center.XCenter(banner)))
-print(Colors.red + Center.XCenter(Box.DoubleCube("TraoAuto tools terbaru")))
 
-
+print(panel(Align.center(banner),border_style='cyan'))
+console.rule('User')
 while True:
 	try:
 		f = open(f'TDS.txt','r')
@@ -137,7 +181,8 @@ while True:
 		f.close()
 		cache = 'old'
 	except FileNotFoundError:
-		token_tds = Write.Input("Masukan Traodoisub accestoken:", Colors.green_to_yellow, interval=0.0025)
+		print(panel('Masukan Traodoisub Acces Token',subtitle='╭─────',subtitle_align='left'))
+		token_tds = input("  ╰──>> ")
 		cache = 'new'
 	
 	for _ in range(3):
@@ -150,17 +195,22 @@ while True:
 	if check_log == 'success':
 		if cache == 'old':
 			while True:
+				print(panel(Align.center(banner_account),border_style='bright_blue'))
+				console.rule('')
 				print(option_acc)
 				try:
-					choice = int(Write.Input("Pilihan akun mu:", Colors.green_to_yellow, interval=0.0025))
+					print(panel('Pilihan Akun mu',subtitle='╭─────┤',subtitle_align='left'))
+					choice = input("  ╰──>> ")
 					if choice in [1,2]:
 						break
 					else:
 						os.system('clear')
-						print(Colors.red + f"salah pilihan, pilih antara 1 atau 2\n")
+						print(panel("salah pilihan, pilih antara 1 atau 2",border_style='bright_red'))
+						print('\n')
 				except:
 					os.system('clear')
-					print(Colors.red + f"salah pilihan, pilih antara 1 atau 2\n")
+					print(panel("salah pilihan, pilih antara 1 atau 2",border_style='bright_red'))
+					print('\n')
 			
 			os.system('clear')
 			if choice == 1:
@@ -178,9 +228,10 @@ while True:
 		os.system('clear')
 
 if check_log == 'success':
-	#Nhập user tiktok
+	#Username tiktok
 	while True:
-		id_tiktok = Write.Input("Masukan username tiktok (pastikan sudah berada di web):", Colors.green_to_yellow, interval=0.0025)
+		print(panel('Masukan username tiktok (pastikan sudah berada di web)',subtitle='╭─────',subtitle_align='left'))
+		id_tiktok = input("  ╰──>> ")
 		for _ in range(3):
 			check_log = check_tiktok(id_tiktok,token_tds)
 			if check_log == 'success' or check_log == 'error_token':
@@ -192,53 +243,59 @@ if check_log == 'success':
 			break
 		elif check_log == 'error_token':
 			os.system('clear')
-			print(Colors.red + f"Username tiktok belum ditambah di website tolong tambah dulu\n")
+			print(panel(f"Username tiktok belum ditambah di website tolong tambah dulu",border_style='bright_red'))
 		else:
 			os.system('clear')
-			print(Colors.red + f"Server error tolong ulangi\n")
+			print("[red]Server error tolong ulangi[/red]")
 
-	#Lựa chọn nhiệm vụ		
 	while True:
+		print(panel(Align.center(banner_tools),border_style='cyan'))
+		console.rule('')
 		print(option)
 		try:
-			choice = int(Write.Input("Pilihan (1/2):", Colors.green_to_yellow, interval=0.0025))
+			print(panel('Pilih Tools',subtitle='╭─────',subtitle_align='left'))
+			choice = int(input("  ╰──>> "))
 			if choice in [1,2]:
 				break
 			else:
 				os.system('clear')
-				print(Colors.red + f"salah pilihan, pilih antara 1 atau 2\n")
+				print(panel("salah pilihan, pilih antara 1 atau 2",border_style='bright_red'))
+				sleep(2)
 		except:
 			os.system('clear')
-			print(Colors.red + f"salah pilihan, pilih antara 1 atau 2\n")
+			print(panel("salah pilihan, pilih antara 1 atau 2",border_style='bright_red'))
+			sleep(2)
 
-	#Nhập delay nhiệm vụ
 	while True:
 		try:
-			delay = int(Write.Input("Delay antara pekerjaan (detik):", Colors.green_to_yellow, interval=0.0025))
-			if delay > 1:
+			print(panel('Delay antara pekerjaan (detik)',subtitle='╭─────┤Minimal 3',subtitle_align='left'))
+			delay = int(input("  ╰──>> "))
+			if delay >= 3:
 				break
 			else:
 				os.system('clear')
-				print(Colors.red + f"tidak boleh kurang dari 3\n")
+				print(panel("tidak boleh kurang dari 3",border_style='bright_red'))
+				sleep(2)
 		except:
 			os.system('clear')
-			print(Colors.red + f"Masukan angka lebih dari 2\n")
+			print(panel("Masukan angka saja",border_style='bright_red'))
+			sleep(2)
 
-	#Nhập max nhiệm vụ
-	while True:
-		try:
-			max_job = int(Write.Input("Maksimum pekerjaan yang dilakukan:", Colors.green_to_yellow, interval=0.0025))
-			if max_job > 9:
-				break
-			else:
+		while True:
+			try:
+				print(panel('Berapa pekerjaan yang akan dilakukan',subtitle='╭─────┤Minimal 10',subtitle_align='left'))
+				max_job = int(input("  ╰──>> "))
+				if max_job >= 10:
+					break
+				else:
+					os.system('clear')
+					print(panel("Minimal pekerjaan adalah 10",border_style='bright_red'))
+					sleep(2)
+			except:
 				os.system('clear')
-				print(Colors.red + f"Minimal pekerjaan adalah 10\n")
-		except:
-			os.system('clear')
-			print(Colors.red + f"Masukan angka diatas 9\n")
-
+				print(panel("Masukan angka di atas 10",border_style='bright_red'))
+				sleep(2)
 	os.system('clear')
-
 	if choice == 1:
 		type_load = 'tiktok_follow'
 		type_duyet = 'TIKTOK_FOLLOW_CACHE'
@@ -253,20 +310,15 @@ if check_log == 'success':
 		type_type = 'TYM'
 
 	dem_tong = 0
-
+	print(panel(Align.center(banner_start),border_stle='bright_blue'))
+	console.rule('')
+	
 	while True:
-		progress = Progress(
-    					SpinnerColumn('dots9'),
-						TextColumn("[green]Running"),
-						BarColumn(),
-						TimeRemainingColumn(),
-						MofNCompleteColumn(),
-						expand=True
-  						)
+		
 		list_job = load_job(type_load, token_tds)
 		sleep(1)
-		with progress:
-			tugas = progress.add_task("",total=max_job)
+		with Progress:
+			tugas = Progress.add_task("",total=max_job)
 			if isinstance(list_job, dict) == True:
 				for job in list_job['data']:
 					uid = job['id']
@@ -276,7 +328,7 @@ if check_log == 'success':
 					if check_duyet != 'error':
 						dem_tong += 1
 						t_now = datetime.now().strftime("%H:%M:%S")
-						progress.update(tugas, advance=1)
+						Progress.update(tugas, advance=1)
 						if check_duyet >= 9:
 							a = duyet_job(type_nhan, token_tds, api_type)
 							sleep(3)
@@ -287,8 +339,6 @@ if check_log == 'success':
 							sleep(1)
 
 		if dem_tong == max_job:
-			print(f'{Colors.green}Complete {max_job} Pekerjaan!')
+			print(f'[green]Complete {max_job} Pekerjaan!')
 			break
-
-
 
