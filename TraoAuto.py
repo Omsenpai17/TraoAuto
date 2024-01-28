@@ -279,7 +279,7 @@ if check_log == 'success':
 		try:
 			print(panel('Delay antara pekerjaan (detik)',subtitle='╭─────┤ Minimal 3 ',subtitle_align='left'))
 			delay = int(input("   ╰──>> "))
-			if delay >= 3:
+			if delay > 3:
 				break
 			else:
 				os.system('clear')
@@ -294,7 +294,7 @@ if check_log == 'success':
 			try:
 				print(panel('Berapa pekerjaan yang akan dilakukan',subtitle='╭─────┤Minimal 10',subtitle_align='left'))
 				max_job = int(input("   ╰──>> "))
-				if max_job >= 10:
+				if max_job > 10:
 					break
 				else:
 					os.system('clear')
