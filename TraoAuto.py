@@ -182,8 +182,8 @@ while True:
 		f.close()
 		cache = 'old'
 	except FileNotFoundError:
-		print(panel(Align.center('[green]Masukan Traodoisub Acces Token[/]',
-						   subtitle='╭─────',subtitle_align='left')))
+		print(panel(Align.center('[green]Masukan Traodoisub Acces Token[/]'),
+						   subtitle='╭─────',subtitle_align='left'))
 		token_tds = input("   ╰──>> ")
 		cache = 'new'
 	
@@ -208,11 +208,11 @@ while True:
 						break
 					else:
 						os.system('clear')
-						print(panel(Align.center("salah pilihan, pilih antara 1 atau 2",border_style='bright_red')))
+						print(panel(Align.center("salah pilihan, pilih antara 1 atau 2"),border_style='bright_red'))
 						print('\n')
 				except:
 					os.system('clear')
-					print(panel(Align.center("salah pilihan, pilih antara 1 atau 2",border_style='bright_red')))
+					print(panel(Align.center("salah pilihan, pilih antara 1 atau 2"),border_style='bright_red'))
 					print('\n')
 			
 			os.system('clear')
