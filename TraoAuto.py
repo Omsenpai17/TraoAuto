@@ -199,7 +199,6 @@ while True:
 			while True:
 				print(panel(Align.center(banner_account),border_style='bright_blue'))
 				console.rule('User')
-				login_tds(token_tds)
 				print(option_acc)
 				try:
 					print(panel(Align.center('Pilihan Akun mu',subtitle='╭─────',subtitle_align='left')))
