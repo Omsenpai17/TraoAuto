@@ -324,11 +324,19 @@ if check_log == 'success':
 	console.rule('')
 	
 	while True:
-		
+		progress = Progress(
+    	"{task.description}",
+    	SpinnerColumn("dots10"),
+		BarColumn(bar_width=200),
+		TextColumn("[progress.percentage]{task.percentage:>3.0f}%"),
+		TimeRemainingColumn(),
+		MofNCompleteColumn(),
+		)
+
 		list_job = load_job(type_load, token_tds)
 		sleep(1)
 		with Progress:
-			tugas = Progress.add_task("",total=max_job)
+			tugas = progress.add_task("[green]Running",total=max_job)
 			if isinstance(list_job, dict) == True:
 				for job in list_job['data']:
 					uid = job['id']
@@ -338,7 +346,7 @@ if check_log == 'success':
 					if check_duyet != 'error':
 						dem_tong += 1
 						t_now = datetime.now().strftime("%H:%M:%S")
-						Progress.update(tugas, advance=1)
+						progress.update(tugas, advance=1)
 						if check_duyet >= 9:
 							a = duyet_job(type_nhan, token_tds, api_type)
 							sleep(3)
