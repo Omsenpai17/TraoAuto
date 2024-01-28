@@ -179,7 +179,7 @@ option_acc.add_row('1.','[#e8851c]Menggunakan Akun Lama','([#ed810e]Tidak mengha
 option_acc.add_row('2.','[#e8851c]Menggunakan Akun Baru','([#ed810e]Menghapus akun lama dan menggunakan yang baru[/])')
 
 print(panel(Align.center(banner),border_style='cyan'))
-console.rule('>> Pilihan Akun <<')
+console.rule('User')
 while True:
 	try:
 		f = open(f'TDS.txt','r')
@@ -203,7 +203,7 @@ while True:
 		if cache == 'old':
 			while True:
 				print(panel(Align.center(banner_account),border_style='bright_blue'))
-				console.rule('User')
+				console.rule('>> Pilihan Akun <<')
 				print(option_acc)
 				try:
 					print(panel(Align.center('[cyan]Pilihan Akun mu'),subtitle='╭─────',subtitle_align='left'))
