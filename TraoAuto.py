@@ -276,23 +276,24 @@ if check_log == 'success':
 			sleep(2)
 
 	while True:
-		try:
-			print(panel('Delay antara pekerjaan (detik)',subtitle='╭─────┤ Minimal 3 ',subtitle_align='left'))
-			delay = int(input("   ╰──>> "))
-			if delay > 3:
-				break
-			else:
+		while True:
+			try:
+				print(panel('Delay antara pekerjaan (detik)',subtitle='╭─────┤ Minimal 3 ',subtitle_align='left'))
+				delay = int(input("   ╰──>> "))
+				if delay > 3:
+					break
+				else:
+					os.system('clear')
+					print(panel("tidak boleh kurang dari 3",border_style='bright_red'))
+					sleep(2)
+			except:
 				os.system('clear')
-				print(panel("tidak boleh kurang dari 3",border_style='bright_red'))
+				print(panel("Masukan angka saja",border_style='bright_red'))
 				sleep(2)
-		except:
-			os.system('clear')
-			print(panel("Masukan angka saja",border_style='bright_red'))
-			sleep(2)
 
 		while True:
 			try:
-				print(panel('Berapa pekerjaan yang akan dilakukan',subtitle='╭─────┤Minimal 10',subtitle_align='left'))
+				print(panel('Berapa pekerjaan yang akan dilakukan',subtitle='╭─────┤Minimal 10 ',subtitle_align='left'))
 				max_job = int(input("   ╰──>> "))
 				if max_job > 10:
 					break
@@ -304,6 +305,7 @@ if check_log == 'success':
 				os.system('clear')
 				print(panel("Masukan angka di atas 10",border_style='bright_red'))
 				sleep(2)
+	
 	os.system('clear')
 	if choice == 1:
 		type_load = 'tiktok_follow'
