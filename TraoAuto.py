@@ -174,6 +174,7 @@ option_acc = '''
 
 print(panel(Align.center(banner),border_style='cyan'))
 console.rule('User')
+sleep(2)
 while True:
 	try:
 		f = open(f'TDS.txt','r')
@@ -191,11 +192,10 @@ while True:
 			break
 		else:
 			sleep(2)
-
+	os.system('clear')
 	if check_log == 'success':
 		if cache == 'old':
 			while True:
-				os.system('clear')
 				print(panel(Align.center(banner_account),border_style='bright_blue'))
 				console.rule('')
 				print(option_acc)
@@ -206,11 +206,11 @@ while True:
 						break
 					else:
 						os.system('clear')
-						print(panel("salah pilihan, pilih antara 1 atau 2",border_style='bright_red'))
+						print(panel(Align.center("salah pilihan, pilih antara 1 atau 2",border_style='bright_red')))
 						print('\n')
 				except:
 					os.system('clear')
-					print(panel("salah pilihan, pilih antara 1 atau 2",border_style='bright_red'))
+					print(panel(Align.center("salah pilihan, pilih antara 1 atau 2",border_style='bright_red')))
 					print('\n')
 			
 			os.system('clear')
