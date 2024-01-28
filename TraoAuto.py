@@ -349,6 +349,9 @@ if check_log == 'success':
 						progress.update(tugas, advance=1)
 						if check_duyet >= 9:
 							a = duyet_job(type_nhan, token_tds, api_type)
+							os.system('clear')
+							print(panel(Align.center(banner_start),border_style='bright_blue'))
+							console.rule('')
 							sleep(3)
 					if dem_tong == max_job:
 						break
