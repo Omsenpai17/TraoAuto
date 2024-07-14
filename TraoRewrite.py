@@ -229,4 +229,4 @@ animasi_set_username()
 
 total = int(input("Jumlah : "))
 cooldown = int(input("cooldown : "))
-animasi_running_job()
+animasi_running_job(total,cooldown)
