@@ -216,7 +216,7 @@ def animasi_running_job(ttl, cd):
 try:
 	with open("token.json", "r") as token:
 		a = json.load(token)
-		Token = a["Token"]
+		Token = a["token"]
 
 except FileNotFoundError:
 	with open("token.json", "w") as token:
