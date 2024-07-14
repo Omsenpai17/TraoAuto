@@ -126,9 +126,8 @@ def get_job(token):
 	if job != 'error':
 		return job
 	else:
-		pesan = 'Anda terlalu cepat,Cooldown sebentar'
 		cd = job["countdown"]
-		return pesan, cd, 'error'
+		return cd, 'error'
 
 
 def redeem_job(token, id_job):
@@ -164,8 +163,8 @@ def animasi_running_job(ttl, cd):
 		list_job = get_job(Token)
 		with Live(loading_job, refresh_per_second=4):
 			if 'error' in list_job:
-				pesan = list_job[0]
-				cd = list_job[1]
+				pesan = 'Terlalu cepat ... menunggu'
+				cd = list_job[0]
 				eror_kolom = [
 					Panel(Align.center(pesan)),
 					Panel(Align.center(f'Menunggu {cd} detik'))
