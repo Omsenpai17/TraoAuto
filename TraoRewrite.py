@@ -192,6 +192,7 @@ def animasi_running_job(ttl, cd):
 							bar.advance(running, advance=1)
 							if get_cache >= 9:
 								koin = get_coin(Token)
+								print(koin)
 								total_job_berhasil = koin[0]
 								bertambah = koin[1]
 								uang = koin[2]
