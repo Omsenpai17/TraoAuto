@@ -181,16 +181,16 @@ def animasi_running_job(ttl, cd):
 	max_job = 0
 	while True:
 		list_job = get_job(Token)	
-		cd = list_job
+		cdstop = list_job[0]
 		with Live(loading_job, refresh_per_second=4):
 			if 'error' in list_job:
 				pesan = 'Terlalu cepat ... menunggu'
 				eror_kolom = [
 					Panel(Align.center(pesan)),
-					Panel(Align.center(f'Menunggu {cd} detik'))
+					Panel(Align.center(f'Menunggu {cdstop} detik'))
 				]
 				print(Panel(Columns(eror_kolom, expand=True)))
-				sleep(cd)
+				sleep(cdstop)
 			else:
 				if isinstance(list_job, dict):
 					for job in list_job['data']:
