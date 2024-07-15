@@ -143,7 +143,17 @@ def get_coin(token):
 	job = redeem_coin['data']['job_success']
 	coin = redeem_coin['data']['msg']
 	money = redeem_coin['data']['xu']
-	return job, coin, money
+
+	redeem_coin_kolom = [
+		Panel(Align.center(job), title='Total Job', title_align='center'),
+		Panel(Align.center(coin), title='Koin Bertambah', title_align='center'),
+		Panel(Align.center(money), title='Total Koin', title_align='center')
+	]
+	reddem_koin_grup = Group(
+		Panel(Align.center('Berhasil Redeem')),
+		Panel(Columns(redeem_coin_kolom, expand=True))
+	)
+	print(Panel(reddem_koin_grup))
 
 # step 3
 def animasi_running_job(ttl, cd):
@@ -191,22 +201,7 @@ def animasi_running_job(ttl, cd):
 							max_job += 1
 							bar.advance(running, advance=1)
 							if get_cache['cache'] >= 9:
-								koin = get_coin(Token)
-								print(koin)
-								total_job_berhasil = koin[0]
-								bertambah = koin[1]
-								uang = koin[2]
-
-								redeem_coin_kolom = [
-									Panel(Align.center(total_job_berhasil), title='Total Job', title_align='center'),
-									Panel(Align.center(bertambah), title='Koin Bertambah', title_align='center'),
-									Panel(Align.center(uang), title='Total Koin', title_align='center')
-								]
-								reddem_koin_grup = Group(
-									Panel(Align.center('Berhasil Redeem')),
-									Panel(Columns(redeem_coin_kolom, expand=True))
-								)
-								print(Panel(reddem_koin_grup))
+								get_coin(Token)
 						if max_job == ttl:
 							break
 						else:
