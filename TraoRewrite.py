@@ -181,7 +181,7 @@ def animasi_running_job(ttl, cooldown):
 	max_job = 0
 	while True:
 		list_job = get_job(Token)	
-		cdstop = list_job[0]
+		cdstop = list_job
 		with Live(loading_job, refresh_per_second=4):
 			if 'error' in list_job:
 				pesan = 'Terlalu cepat ... menunggu'
