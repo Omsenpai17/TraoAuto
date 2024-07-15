@@ -76,6 +76,7 @@ def animasi_check_account():
 def set_username(token, username):
 	r = requests.get(f"https://traodoisub.com/api/?fields=tiktok_run&id={username}&access_token={token}", timeout=5,
 					 headers=headers).json()
+	print ('r')
 	ID = r['data']['id']
 	id_unik = r['data']['uniqueID']
 	pesan = 'Berhasil menyetel username'
