@@ -76,12 +76,18 @@ def animasi_check_account():
 def set_username(token, username):
 	r = requests.get(f"https://traodoisub.com/api/?fields=tiktok_run&id={username}&access_token={token}", timeout=5,
 					 headers=headers).json()
-	print (r)
-	ID = r['data']['id']
-	id_unik = r['data']['uniqueID']
-	pesan = 'Berhasil menyetel username'
-	return ID, id_unik, pesan
-
+	if r != 'error':
+		ID = r['data']['id']
+		id_unik = r['data']['uniqueID']
+		pesan = 'Berhasil menyetel username'
+		return ID, id_unik, pesan
+	else:
+		error = [
+			Panel(Align.center("! error !")),
+			Panel(Align.center("Harap Masukan Username Kedalam Web Akun Traodoisub Dahulu"))
+		]
+		print(Panel(Columns(error,expand=True)))
+		return 'error'
 # step 2
 def animasi_set_username():
 	loading_anim = Spinner("dots3", "Loading ...")
@@ -101,23 +107,26 @@ def animasi_set_username():
 	os.system('cls')
 
 	send = set_username(Token, nama)
-	id = send[0]
-	id_unik = send[1]
-	pesan = send[2]
+	if 'error' in send:
+		pass
+	else:	
+		id = send[0]
+		id_unik = send[1]
+		pesan = send[2]
 
-	data_tiktok = [
+		data_tiktok = [
 		Panel(Align.center(id), title='ID Tiktok', title_align='center'),
 		Panel(Align.center(id_unik), title='ID Unik', title_align='center'),
 		Panel(Align.center(pesan), title='Pesan Server', title_align='center')
 	]
-	tiktok_grup = Group(
+		tiktok_grup = Group(
 		Panel(Align.center('Berhasil Menyetel Username')),
 		Columns(data_tiktok, expand=True)
 	)
 
-	with Live(send_username, refresh_per_second=4):
-		sleep(5)
-	print(Panel(tiktok_grup))
+		with Live(send_username, refresh_per_second=4):
+			sleep(5)
+		print(Panel(tiktok_grup))
 
 
 def get_job(token):
