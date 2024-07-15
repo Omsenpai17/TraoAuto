@@ -153,7 +153,7 @@ def get_coin(token):
 	job = redeem_coin['data']['job_success']
 	coin = redeem_coin['data']['msg']
 	money = redeem_coin['data']['xu']
-
+	print(redeem_coin)
 	redeem_coin_kolom = [
 		Panel(Align.center(job), title='Total Job', title_align='center'),
 		Panel(Align.center(coin), title='Koin Bertambah', title_align='center'),
@@ -161,7 +161,7 @@ def get_coin(token):
 	]
 	reddem_koin_grup = Group(
 		Panel(Align.center('Berhasil Redeem')),
-		Panel(Columns(redeem_coin_kolom, expand=True))
+		Columns(redeem_coin_kolom, expand=True)
 	)
 	print(Panel(reddem_koin_grup))
 
