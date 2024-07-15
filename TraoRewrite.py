@@ -214,8 +214,9 @@ def animasi_running_job(ttl, cooldown):
 								get_coin(Token)
 						if max_job == ttl:
 							break
-						
-						sleep(cooldown)
+						else:
+							for i in range(cooldown, -1, -1):
+ 								sleep(1)
 
 
 try:
