@@ -210,7 +210,7 @@ def animasi_running_job(ttl, cd):
 						if get_cache != 'error':
 							max_job += 1
 							bar.advance(running, advance=1)
-							if get_cache['cache'] >= 9:
+							if get_cache >= 9:
 								get_coin(Token)
 						if max_job == ttl:
 							break
