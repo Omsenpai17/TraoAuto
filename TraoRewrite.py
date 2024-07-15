@@ -180,11 +180,11 @@ def animasi_running_job(ttl, cd):
 
 	max_job = 0
 	while True:
-		list_job = get_job(Token)
+		list_job = get_job(Token)	
+		cd = list_job[0]
 		with Live(loading_job, refresh_per_second=4):
 			if 'error' in list_job:
 				pesan = 'Terlalu cepat ... menunggu'
-				cd = list_job[0]
 				eror_kolom = [
 					Panel(Align.center(pesan)),
 					Panel(Align.center(f'Menunggu {cd} detik'))
