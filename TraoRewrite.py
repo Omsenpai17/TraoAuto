@@ -166,7 +166,7 @@ def get_coin(token):
 	print(Panel(reddem_koin_grup))
 
 # step 3
-def animasi_running_job(ttl, cd):
+def animasi_running_job(ttl, cooldown):
 	running = bar.add_task("", total=ttl)
 	loading_anim = Spinner("dots3", "Loading ...")
 	panel_loading = [
@@ -214,8 +214,8 @@ def animasi_running_job(ttl, cd):
 								get_coin(Token)
 						if max_job == ttl:
 							break
-						else:
-							sleep(cd)
+						
+						sleep(cooldown)
 
 
 try:
