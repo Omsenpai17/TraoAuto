@@ -216,7 +216,7 @@ def animasi_running_job(ttl, cooldown):
 						if get_cache != 'error':
 							max_job += 1
 							bar.advance(running, advance=1)
-							if f'{get_cache}' >= 9:
+							if get_cache >= 9:
 								get_coin(Token)
 						if max_job == ttl:
 							break
@@ -224,7 +224,6 @@ def animasi_running_job(ttl, cooldown):
 							for i in range(cooldown, -1, -1):
 								sleep(1)
 
-os.system("clear")
 
 os.system("clear")
 
