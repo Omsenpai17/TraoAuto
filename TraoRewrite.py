@@ -172,7 +172,7 @@ def get_coin(token):
 
 
 # step 3
-def animasi_running_job(ttl, cooldown):
+def animasi_running_job(ttl, cdjob):
 	running = bar.add_task("", total=ttl)
 	loading_anim = Spinner("dots3", "Loading ...")
 	panel_loading = [
@@ -184,46 +184,45 @@ def animasi_running_job(ttl, cooldown):
 		Panel(Align.center(bar))
 	))
 
-	max_job = 0
 	while True:
 		list_job = get_job(Token)
 		cdstop = list_job
 		with Live(loading_job, refresh_per_second=4):
-			if 'error' in list_job:
-				pesan = 'Terlalu cepat ... menunggu'
-				eror_kolom = [
+			max_job = 0
+			while not bar.finished:
+				if 'error' in list_job:
+					pesan = 'Terlalu cepat ... menunggu'
+					eror_kolom = [
 					Panel(Align.center(pesan)),
 					Panel(Align.center(f'Menunggu {cdstop} detik'))
-				]
-				print(Panel(Columns(eror_kolom, expand=True)))
-				sleep(f"{cdstop}")
-			else:
-				if isinstance(list_job, dict):
-					for job in list_job['data']:
-						time = datetime.datetime.now().strftime("%H : %M : %S")
-						job_id = job['id']
-						username_tiktok = job['uniqueID']
-						link = job['link']
+					]
+					print(Panel(Columns(eror_kolom, expand=True)))
+					sleep(f"{cdstop}")
+				else:
+					if isinstance(list_job, dict):
+						for job in list_job['data']:
+							time = datetime.datetime.now().strftime("%H : %M : %S")
+							job_id = job['id']
+							username_tiktok = job['uniqueID']
+							link = job['link']
 
-						job_columns = [
-							Panel(Align.center(job_id)),
-							Panel(Align.center(username_tiktok)),
-							Panel(Align.center(time))
-						]
-						print(Panel(Columns(job_columns, expand=True)))
-						os.system(f'termux-open-url {link}')
-						get_cache = redeem_job(Token, job_id)
-						if get_cache != 'error':
+							job_columns = [
+								Panel(Align.center(job_id)),
+								Panel(Align.center(username_tiktok)),
+								Panel(Align.center(time))
+							]
+							print(Panel(Columns(job_columns, expand=True)))
+							os.system(f'termux-open-url {link}')
 							max_job += 1
-							bar.advance(running, advance=1)
-							if get_cache >= 9:
-								get_coin(Token)
-						if max_job == ttl:
-							break
-						else:
-							for i in range(cooldown, -1, -1):
-								sleep(1)
-
+							get_cache = redeem_job(Token, job_id)
+							if get_cache != 'error':
+								max_job += 1
+								bar.advance(running, advance=1)
+								if get_cache >= 9:
+									get_coin(Token)
+							else:
+								for i in range(cdjob, -1, -1):
+									sleep(1)
 
 os.system("clear")
 
