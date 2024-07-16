@@ -153,11 +153,10 @@ def get_coin(token):
 	job = redeem_coin['data']['job_success']
 	coin = redeem_coin['data']['msg']
 	money = redeem_coin['data']['xu']
-	print(redeem_coin)
 	redeem_coin_kolom = [
-		Panel(Align.center(job), title='Total Job', title_align='center'),
-		Panel(Align.center(coin), title='Koin Bertambah', title_align='center'),
-		Panel(Align.center(money), title='Total Koin', title_align='center')
+		Panel(Align.center(f'{job}'), title='Total Job', title_align='center'),
+		Panel(Align.center(f'{coin}'), title='Koin Bertambah', title_align='center'),
+		Panel(Align.center(f'{money}'), title='Total Koin', title_align='center')
 	]
 	reddem_koin_grup = Group(
 		Panel(Align.center('Berhasil Redeem')),
@@ -181,7 +180,7 @@ def animasi_running_job(ttl, cooldown):
 	max_job = 0
 	while True:
 		list_job = get_job(Token)	
-		cdstop = list_job
+		cdstop = list_job[0]
 		with Live(loading_job, refresh_per_second=4):
 			if 'error' in list_job:
 				pesan = 'Terlalu cepat ... menunggu'
@@ -190,7 +189,7 @@ def animasi_running_job(ttl, cooldown):
 					Panel(Align.center(f'Menunggu {cdstop} detik'))
 				]
 				print(Panel(Columns(eror_kolom, expand=True)))
-				sleep(cdstop)
+				sleep(f"{cdstop}")
 			else:
 				if isinstance(list_job, dict):
 					for job in list_job['data']:
@@ -210,7 +209,7 @@ def animasi_running_job(ttl, cooldown):
 						if get_cache != 'error':
 							max_job += 1
 							bar.advance(running, advance=1)
-							if get_cache >= 9:
+							if f'{get_cache}' >= 9:
 								get_coin(Token)
 						if max_job == ttl:
 							break
@@ -218,6 +217,7 @@ def animasi_running_job(ttl, cooldown):
 							for i in range(cooldown, -1, -1):
  								sleep(1)
 
+os.system("clear")
 
 try:
 	with open("token.json", "r") as token:
