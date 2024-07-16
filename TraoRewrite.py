@@ -139,8 +139,7 @@ def get_job(token):
 	if job != 'error':
 		return job
 	else:
-		cd = job["countdown"]
-		return cd, 'error'
+		return job["countdown"], 'error'
 
 
 def redeem_job(token, id_job):
@@ -193,8 +192,8 @@ def animasi_running_job(ttl, cdjob):
 				if 'error' in list_job:
 					pesan = 'Terlalu cepat ... menunggu'
 					eror_kolom = [
-					Panel(Align.center(pesan)),
-					Panel(Align.center(f'Menunggu {cdstop} detik'))
+						Panel(Align.center(pesan)),
+						Panel(Align.center(f'Menunggu {cdstop} detik'))
 					]
 					print(Panel(Columns(eror_kolom, expand=True)))
 					sleep(f"{cdstop}")
@@ -223,6 +222,7 @@ def animasi_running_job(ttl, cdjob):
 							else:
 								for i in range(cdjob, -1, -1):
 									sleep(1)
+
 
 os.system("clear")
 
