@@ -45,6 +45,7 @@ def check_account(token):
 	koin = r["data"]["xu"]
 	return user, koin
 
+
 # step 1
 def animasi_check_account():
 	send = check_account(Token)
@@ -86,8 +87,10 @@ def set_username(token, username):
 			Panel(Align.center("! error !")),
 			Panel(Align.center("Harap Masukan Username Kedalam Web Akun Traodoisub Dahulu"))
 		]
-		print(Panel(Columns(error,expand=True)))
+		print(Panel(Columns(error, expand=True)))
 		return 'error'
+
+
 # step 2
 def animasi_set_username():
 	loading_anim = Spinner("dots3", "Loading ...")
@@ -109,20 +112,20 @@ def animasi_set_username():
 	send = set_username(Token, nama)
 	if 'error' in send:
 		pass
-	else:	
+	else:
 		id = send[0]
 		id_unik = send[1]
 		pesan = send[2]
 
 		data_tiktok = [
-		Panel(Align.center(id), title='ID Tiktok', title_align='center'),
-		Panel(Align.center(id_unik), title='ID Unik', title_align='center'),
-		Panel(Align.center(pesan), title='Pesan Server', title_align='center')
-	]
+			Panel(Align.center(id), title='ID Tiktok', title_align='center'),
+			Panel(Align.center(id_unik), title='ID Unik', title_align='center'),
+			Panel(Align.center(pesan), title='Pesan Server', title_align='center')
+		]
 		tiktok_grup = Group(
-		Panel(Align.center('Berhasil Menyetel Username')),
-		Columns(data_tiktok, expand=True)
-	)
+			Panel(Align.center('Berhasil Menyetel Username')),
+			Columns(data_tiktok, expand=True)
+		)
 
 		with Live(send_username, refresh_per_second=4):
 			sleep(5)
@@ -143,8 +146,11 @@ def get_job(token):
 def redeem_job(token, id_job):
 	cache = requests.get(f'https://traodoisub.com/api/coin/?type=TIKTOK_FOLLOW_CACHE&id={id_job}&access_token={token}',
 						 headers=headers, timeout=5).json()
-	total_cache = cache["cache"]
-	return total_cache
+	if "cache" in cache:
+		return cache['cache']
+	else:
+		print(Align.center(Panel("Error saat reddem job", expand=False)))
+		return 'error'
 
 
 def get_coin(token):
@@ -153,17 +159,17 @@ def get_coin(token):
 	job = redeem_coin['data']['job_success']
 	coin = redeem_coin['data']['msg']
 	money = redeem_coin['data']['xu']
-	print(redeem_coin)
 	redeem_coin_kolom = [
-		Panel(Align.center(job), title='Total Job', title_align='center'),
-		Panel(Align.center(coin), title='Koin Bertambah', title_align='center'),
-		Panel(Align.center(money), title='Total Koin', title_align='center')
+		Panel(Align.center(f'{job}'), title='Total Job', title_align='center'),
+		Panel(Align.center(f'{coin}'), title='Koin Bertambah', title_align='center'),
+		Panel(Align.center(f'{money}'), title='Total Koin', title_align='center')
 	]
 	reddem_koin_grup = Group(
 		Panel(Align.center('Berhasil Redeem')),
 		Columns(redeem_coin_kolom, expand=True)
 	)
 	print(Panel(reddem_koin_grup))
+
 
 # step 3
 def animasi_running_job(ttl, cooldown):
@@ -180,7 +186,7 @@ def animasi_running_job(ttl, cooldown):
 
 	max_job = 0
 	while True:
-		list_job = get_job(Token)	
+		list_job = get_job(Token)
 		cdstop = list_job
 		with Live(loading_job, refresh_per_second=4):
 			if 'error' in list_job:
@@ -190,7 +196,7 @@ def animasi_running_job(ttl, cooldown):
 					Panel(Align.center(f'Menunggu {cdstop} detik'))
 				]
 				print(Panel(Columns(eror_kolom, expand=True)))
-				sleep(cdstop)
+				sleep(f"{cdstop}")
 			else:
 				if isinstance(list_job, dict):
 					for job in list_job['data']:
@@ -216,8 +222,10 @@ def animasi_running_job(ttl, cooldown):
 							break
 						else:
 							for i in range(cooldown, -1, -1):
- 								sleep(1)
+								sleep(1)
 
+
+os.system("clear")
 
 try:
 	with open("token.json", "r") as token:
@@ -235,4 +243,4 @@ animasi_set_username()
 
 total = int(input("Jumlah : "))
 cooldown = int(input("cooldown : "))
-animasi_running_job(total,cooldown)
+animasi_running_job(total, cooldown)
